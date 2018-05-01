@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1024.0" styleClass="window" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.QuestionsController">
+   <children>
+      <TextField fx:id="txtFieldQuestion" layoutX="556.0" layoutY="42.0" prefHeight="24.0" prefWidth="167.0" promptText="Question" styleClass="textFields" />
+      <TextField fx:id="txtFieldName" layoutX="307.0" layoutY="42.0" prefHeight="24.0" prefWidth="167.0" promptText="Teacher name" styleClass="textFields" />
+      <TextField fx:id="txtFieldId" alignment="CENTER" layoutX="69.0" layoutY="42.0" prefHeight="24.0" prefWidth="167.0" promptText="ID" styleClass="textFields" />
+      <TextField fx:id="txtFieldCourse" layoutX="813.0" layoutY="42.0" prefHeight="24.0" prefWidth="167.0" promptText="Course" styleClass="textFields" />
+      <TableView fx:id="tblQuestions" layoutX="38.0" layoutY="275.0" prefHeight="245.0" prefWidth="916.0">
+        <columns>
+          <TableColumn fx:id="tbcId" prefWidth="458.0" text="ID" />
+          <TableColumn fx:id="tbcName" prefWidth="458.0" text="Teacher Name" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnSearch" layoutX="460.0" layoutY="145.0" mnemonicParsing="false" onAction="#searchQuestion" styleClass="buttonStyleSearch" text="Search" />
+      <Button fx:id="update" layoutX="460.0" layoutY="585.0" mnemonicParsing="false" styleClass="buttonStyleUpdate" text="Update" />
+   </children>
+</AnchorPane>
