@@ -50,6 +50,7 @@ public class QuestionsController {
 
 	@FXML
 	void searchQuestion(ActionEvent event) {
+		System.out.println("s");
 		tblQuestions.getItems().clear();
 		String questionId = txtFieldId.getText();
 		String questionCourse = txtFieldCourse.getText();
