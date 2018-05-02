@@ -22,7 +22,7 @@ public class Main extends Application {
 			primaryStage.getIcons().add(new javafx.scene.image.Image("/application/icons/Categories-applications-education-university-icon.png"));
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.show();//naor 
+			primaryStage.show();//naor  asd
 			
 		} catch(Exception e) {
 			e.printStackTrace();
