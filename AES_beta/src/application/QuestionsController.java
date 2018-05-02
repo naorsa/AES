@@ -1,7 +1,11 @@
 package application;
 
-import org.controlsfx.control.textfield.TextFields;
+import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
+import org.controlsfx.control.textfield.TextFields;
+import ocsf.client.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-public class QuestionsController {
+public class QuestionsController implements Observer{
 
 	@FXML
 	private TextField txtFieldQuestion;
@@ -105,8 +109,21 @@ public class QuestionsController {
 	}
 
 	@FXML
-	public void initialize() {
+	public void initialize() throws IOException {
 		Platform.runLater(() -> rootPane.requestFocus());
+		questions = FXCollections.observableArrayList(new Question("Omer", "Enter", "204403257", "Stam"),
+				new Question("Naor", "Press", "308023381", "Stam"), new Question("Gal", "Press", "213446654", "Stam"),
+				new Question("Alon", "Press", "16498549", "Stam"),
+				new Question("Malloc", "Press", "464889123", "Stam"));
+		tblQuestions.getItems().clear();
+		ObservableClient client = new ObservableClient("localhost",8000);
+		client.addObserver(this);
+		client.openConnection();
+		client.sendToServer("Hi you");
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
 		String[] possibleIDs = { "204403257", "308023381", "16498549", "213446654", "464889123" };
 		String[] possibleNames = { "Gal", "Alon", "Malloc", "Omer", "Naor" };
 		String[] possibleQuestion = { "What?", "Why?", "Who?", "Enter", "Press" };
@@ -115,12 +132,10 @@ public class QuestionsController {
 		TextFields.bindAutoCompletion(txtFieldName, possibleNames);
 		TextFields.bindAutoCompletion(txtFieldQuestion, possibleQuestion);
 		TextFields.bindAutoCompletion(txtFieldCourse, possibleCourses);
-		questions = FXCollections.observableArrayList(new Question("Omer", "Enter", "204403257", "Stam"),
-				new Question("Naor", "Press", "308023381", "Stam"), new Question("Gal", "Press", "213446654", "Stam"),
-				new Question("Alon", "Press", "16498549", "Stam"),
-				new Question("Malloc", "Press", "464889123", "Stam"));
-		tblQuestions.getItems().clear();
-
+		String s = (String)arg;
+		System.out.println(s);
+		
 	}
 
+	
 }
