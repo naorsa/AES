@@ -51,7 +51,7 @@ public class QuestionsController implements Observer{
 	private Button update;
 
 	private ObservableList<Question> questions;
-
+//s
 	@FXML
 	void searchQuestion(ActionEvent event) {
 		System.out.println("c");
