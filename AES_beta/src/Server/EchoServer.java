@@ -36,7 +36,7 @@ public class EchoServer extends AbstractServer
 	    String str = (String) msg;
 	    if(str.equals("Data base"))
 	    {
-	    	str ="Moshedsh";
+	    	str ="Moshedsdsh";
 	    }
 	    this.sendToAllClients(msg);
 	  }
