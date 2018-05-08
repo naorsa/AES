@@ -21,35 +21,50 @@ import javafx.scene.layout.AnchorPane;
 
 public class QuestionsController implements Observer{
 
-	@FXML
-	private TextField txtFieldQuestion;//siiiiii
+    @FXML
+    private TextField txtFieldQuestion;
 
-	@FXML
-	private TableColumn<Question, String> tbcId;
+    @FXML
+    private TableColumn<Question, String> tbcAns1;
 
-	@FXML
-	private TableView<Question> tblQuestions;
+    @FXML
+    private TableColumn<Question, String> tbcCorr;
 
-	@FXML
-	private TextField txtFieldCourse;
+    @FXML
+    private TableColumn<Question, String> tbcId;
 
-	@FXML
-	private TextField txtFieldId;
+    @FXML
+    private TableColumn<Question, String> tbcAns3;
 
-	@FXML
-	private Button btnSearch;
+    @FXML
+    private TextField txtFieldId;
 
-	@FXML
-	private TableColumn<Question, String> tbcName;
+    @FXML
+    private TableColumn<Question, String> tbcAns4;
 
-	@FXML
-	private AnchorPane rootPane;
+    @FXML
+    private Button btnSearch;
 
-	@FXML
-	private TextField txtFieldName;
+    @FXML
+    private TableColumn<Question, String> tbcIdText;
 
-	@FXML
-	private Button update;
+    @FXML
+    private TableColumn<Question, String> tbcName;
+
+    @FXML
+    private AnchorPane rootPane;
+
+    @FXML
+    private TextField txtFieldName;
+
+    @FXML
+    private Button update;
+
+    @FXML
+    private TableView<Question> tblQuestions;
+
+    @FXML
+    private TableColumn<Question, String> tbcIdNum;
 
 	private ObservableList<Question> questions;
 //s
@@ -57,7 +72,6 @@ public class QuestionsController implements Observer{
 	void searchQuestion(ActionEvent event) {
 		tblQuestions.getItems().clear();
 		String questionId = txtFieldId.getText();
-		String questionCourse = txtFieldCourse.getText();
 		String questionName = txtFieldName.getText();
 		String questionIns = txtFieldQuestion.getText();
 		ObservableList<Question> queryQuestions = FXCollections.observableArrayList();
@@ -70,15 +84,7 @@ public class QuestionsController implements Observer{
 			}
 
 		}
-		if (questionCourse != null) {
-			for (int i = 0; i < questions.size(); i++) {
-				Question q = questions.get(i);
-				if (q.getCourseName().equals(questionCourse) && (!queryQuestions.contains(q))) {
-					queryQuestions.add(q);
-				}
-			}
 
-		}
 		if (questionName != null) {
 			for (int i = 0; i < questions.size(); i++) {
 				Question q = questions.get(i);
@@ -101,7 +107,6 @@ public class QuestionsController implements Observer{
 		tbcName.setCellValueFactory(new PropertyValueFactory<Question, String>("teacherName"));
 		tblQuestions.setItems(queryQuestions);
 
-		txtFieldCourse.clear();
 		txtFieldId.clear();
 		txtFieldName.clear();
 		txtFieldQuestion.clear();
@@ -129,11 +134,9 @@ public class QuestionsController implements Observer{
 		String[] possibleIDs = { "204403257", "308023381", "16498549", "213446654", "464889123" };
 		String[] possibleNames = { "Gal", "Alon", "Malloc", "Omer", "Naor" };
 		String[] possibleQuestion = { "What?", "Why?", "Who?", "Enter", "Press" };
-		String[] possibleCourses = { "Shitot", "Tests", "Stam" };
 		TextFields.bindAutoCompletion(txtFieldId, possibleIDs);
 		TextFields.bindAutoCompletion(txtFieldName, possibleNames);
 		TextFields.bindAutoCompletion(txtFieldQuestion, possibleQuestion);
-		TextFields.bindAutoCompletion(txtFieldCourse, possibleCourses);
 		String s = (String)arg;
 		System.out.println(s);
 		
