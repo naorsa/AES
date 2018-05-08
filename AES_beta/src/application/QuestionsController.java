@@ -22,7 +22,7 @@ import javafx.scene.layout.AnchorPane;
 public class QuestionsController implements Observer{
 
 	@FXML
-	private TextField txtFieldQuestion;
+	private TextField txtFieldQuestion;//siiiiii
 
 	@FXML
 	private TableColumn<Question, String> tbcId;
