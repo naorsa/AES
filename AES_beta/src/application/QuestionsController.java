@@ -5,6 +5,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import org.controlsfx.control.textfield.TextFields;
+
+import ocsf.client.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -117,7 +119,9 @@ public class QuestionsController implements Observer{
 		ObservableClient client = new ObservableClient("localhost",8000);
 		client.addObserver(this);
 		client.openConnection();
+
 		client.sendToServer("Data base");
+
 	}
 
 	@Override

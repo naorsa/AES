@@ -1,4 +1,4 @@
-package application;
+package Server;
 
 import java.io.*;
 import java.sql.Connection;
@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import application.Question;
 import ocsf.server.*;
 
 public class EchoServer extends AbstractServer 
@@ -74,7 +75,7 @@ public class EchoServer extends AbstractServer
   {
     int port = 0; //Port to listen on
 
-        
+
     try
     {
       port = Integer.parseInt(args[0]); //Get port from command line
