@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -28,7 +29,7 @@ public class QuestionsController implements Observer{
     private TableColumn<Question, String> tbcAns1;
 
     @FXML
-    private TableColumn<Question, String> tbcCorr;
+    private TableColumn<Question, Integer> tbcCorr;
 
     @FXML
     private TableColumn<Question, String> tbcId;
@@ -66,10 +67,14 @@ public class QuestionsController implements Observer{
     @FXML
     private TableColumn<Question, String> tbcIdNum;
 
-	private ObservableList<Question> questions;
+	private ArrayList<Question> questions;
 //s
 	@FXML
 	void searchQuestion(ActionEvent event) {
+		String ans1;
+		String ans2;
+		String ans3;
+		String ans4;
 		tblQuestions.getItems().clear();
 		String questionId = txtFieldId.getText();
 		String questionName = txtFieldName.getText();
@@ -105,7 +110,13 @@ public class QuestionsController implements Observer{
 		}
 		tbcId.setCellValueFactory(new PropertyValueFactory<Question, String>("id"));
 		tbcName.setCellValueFactory(new PropertyValueFactory<Question, String>("teacherName"));
+		tbcIdText.setCellValueFactory(new PropertyValueFactory<Question, String>("questionIns"));
+		tbcCorr.setCellValueFactory(new PropertyValueFactory<Question, Integer>("correctAns"));
+		tbcAns1.setCellValueFactory(new PropertyValueFactory<Question, String>("ans1"));
+		tbcAns3.setCellValueFactory(new PropertyValueFactory<Question, String>("ans2"));
+		tbcAns4.setCellValueFactory(new PropertyValueFactory<Question, String>("ans3"));
 		tblQuestions.setItems(queryQuestions);
+		
 
 		txtFieldId.clear();
 		txtFieldName.clear();
@@ -116,10 +127,6 @@ public class QuestionsController implements Observer{
 	@FXML
 	public void initialize() throws IOException {
 		Platform.runLater(() -> rootPane.requestFocus());
-		questions = FXCollections.observableArrayList(new Question("Omer", "Enter", "204403257", "Stam"),
-				new Question("Naor", "Press", "308023381", "Stam"), new Question("Gal", "Press", "213446654", "Stam"),
-				new Question("Alon", "Press", "16498549", "Stam"),
-				new Question("Malloc", "Press", "464889123", "Stam"));
 		tblQuestions.getItems().clear();
 		ObservableClient client = new ObservableClient("localhost",8000);
 		client.addObserver(this);
@@ -131,15 +138,32 @@ public class QuestionsController implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		String[] possibleIDs = { "204403257", "308023381", "16498549", "213446654", "464889123" };
-		String[] possibleNames = { "Gal", "Alon", "Malloc", "Omer", "Naor" };
-		String[] possibleQuestion = { "What?", "Why?", "Who?", "Enter", "Press" };
-		TextFields.bindAutoCompletion(txtFieldId, possibleIDs);
-		TextFields.bindAutoCompletion(txtFieldName, possibleNames);
-		TextFields.bindAutoCompletion(txtFieldQuestion, possibleQuestion);
-		String s = (String)arg;
-		System.out.println(s);
-		
+
+		if(arg instanceof String)
+		{
+			String s = (String)arg;
+			System.out.println(s);
+		}
+		if(arg instanceof ArrayList<?>)
+		{
+			questions = (ArrayList<Question>)arg;
+			String[] possibleIDs = new String [questions.size()];
+			String[] possibleNames = new String [questions.size()];
+			String[] possibleQuestion = new String [questions.size()];
+			int i=0;
+			for(Question q:questions)
+			{
+				
+				possibleIDs[i] = q.getId();
+				possibleNames[i] = q.getTeacherName();
+				possibleQuestion[i] = q.getQuestionIns();
+				i++;
+			}
+			
+			TextFields.bindAutoCompletion(txtFieldId, possibleIDs);
+			TextFields.bindAutoCompletion(txtFieldName, possibleNames);
+			TextFields.bindAutoCompletion(txtFieldQuestion, possibleQuestion);
+		}
 	}
 
 	
