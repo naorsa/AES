@@ -29,3 +29,6 @@
 	-fx-opacity:0.8;
 	-fx-font-weight:bold;
 }
+.tableColumn {
+  -fx-alignment: CENTER;
+}

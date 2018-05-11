@@ -129,6 +129,12 @@ public class QuestionsController implements Observer{
 
 	}
 
+
+    @FXML
+    void updateQuestion(ActionEvent event) {
+    	
+    }
+	
 	@FXML
 	public void initialize() throws IOException {
 		Platform.runLater(() -> rootPane.requestFocus());
@@ -158,7 +164,7 @@ public class QuestionsController implements Observer{
 			String[] possibleQuestion = new String [questions.size()];
 			int i=0;
 			
-			for(Question q:questions)
+			for(Question q : questions)
 			{
 				
 				possibleIDs[i] = q.getId();

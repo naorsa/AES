@@ -14,18 +14,18 @@
       <TextField fx:id="txtFieldId" alignment="CENTER" layoutX="70.0" layoutY="42.0" prefHeight="24.0" prefWidth="246.0" promptText="ID" styleClass="textFields" />
       <TableView fx:id="tblQuestions" layoutX="38.0" layoutY="275.0" prefHeight="245.0" prefWidth="918.0">
         <columns>
-          <TableColumn fx:id="tbcId" prefWidth="102.0" text="ID" />
-            <TableColumn fx:id="tbcIdNum" prefWidth="102.0" text="Num" />
-          <TableColumn fx:id="tbcName" prefWidth="102.0" text="Teacher Name" />
-            <TableColumn fx:id="tbcIdText" prefWidth="102.0" text="Text" />
-            <TableColumn fx:id="tbcAns1" prefWidth="102.0" text="Answer 1" />
-            <TableColumn fx:id="tbcAns2" prefWidth="102.0" text="Answer 2" />
-            <TableColumn fx:id="tbcAns3" prefWidth="102.0" text="Answer 3" />
-            <TableColumn fx:id="tbcAns4" prefWidth="102.0" text="Answer 4" />
-            <TableColumn fx:id="tbcCorr" prefWidth="102.0" text="Correct" />
+          <TableColumn fx:id="tbcId" prefWidth="102.0" styleClass="tableColumn" text="ID" />
+            <TableColumn fx:id="tbcIdNum" prefWidth="102.0" styleClass="tableColumn" text="Num" />
+          <TableColumn fx:id="tbcName" prefWidth="102.0" styleClass="tableColumn" text="Teacher Name" />
+            <TableColumn fx:id="tbcIdText" prefWidth="102.0" styleClass="tableColumn" text="Text" />
+            <TableColumn fx:id="tbcAns1" prefWidth="102.0" styleClass="tableColumn" text="Answer 1" />
+            <TableColumn fx:id="tbcAns2" prefWidth="102.0" styleClass="tableColumn" text="Answer 2" />
+            <TableColumn fx:id="tbcAns3" prefWidth="102.0" styleClass="tableColumn" text="Answer 3" />
+            <TableColumn fx:id="tbcAns4" prefWidth="102.0" styleClass="tableColumn" text="Answer 4" />
+            <TableColumn fx:id="tbcCorr" prefWidth="102.0" styleClass="tableColumn" text="Correct" />
         </columns>
       </TableView>
       <Button fx:id="btnSearch" layoutX="460.0" layoutY="145.0" mnemonicParsing="false" onAction="#searchQuestion" styleClass="buttonStyleSearch" text="Search" />
-      <Button fx:id="update" layoutX="460.0" layoutY="585.0" mnemonicParsing="false" styleClass="buttonStyleUpdate" text="Update" />
+      <Button fx:id="update" layoutX="460.0" layoutY="585.0" mnemonicParsing="false" onAction="#updateQuestion" styleClass="buttonStyleUpdate" text="Update" />
    </children>
 </AnchorPane>
