@@ -143,7 +143,7 @@ public class QuestionsController implements Observer{
 		client.addObserver(this);
 		client.openConnection();
 
-		client.sendToServer("Data base");
+		client.sendToServer("get-questions");
 
 	}
 
