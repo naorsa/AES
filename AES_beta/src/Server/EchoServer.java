@@ -10,7 +10,11 @@ import java.util.ArrayList;
 
 import application.Question;
 import ocsf.server.*;
-
+/**
+ * This Class is implements the server side
+ * The class extends the AbstractServer class
+ * Super class is implemented all the connection methods
+*/
 public class EchoServer extends AbstractServer 
 {
 
