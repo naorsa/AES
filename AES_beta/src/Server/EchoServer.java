@@ -50,7 +50,7 @@ public class EchoServer extends AbstractServer
 				ResultSet rs = stmt.executeQuery("SELECT * FROM questions;");
 				while(rs.next())
 		 		{
-					dataBase.add(new Question(rs.getString(1),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getInt(9)));
+					dataBase.add(new Question(rs.getString(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getInt(9)));
 				} 
 				rs.close();
 			}catch (SQLException e) {e.printStackTrace();}
@@ -98,7 +98,7 @@ public class EchoServer extends AbstractServer
     
     try 
     {
-        conn = DriverManager.getConnection("jdbc:mysql://localhost/aes","root","308023");
+        conn = DriverManager.getConnection("jdbc:mysql://109.94.101.137/aes","root","308023");
         System.out.println("SQL connection succeed");
     }catch (SQLException ex) 
 	    {/* handle any errors*/
