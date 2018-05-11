@@ -19,6 +19,7 @@ public class EchoServer extends AbstractServer
 {
 
   final public static int DEFAULT_PORT = 8000;
+  String [] recivedMSG;
   private ArrayList<Question> dataBase;
   private static Connection conn;
   public EchoServer(int port) 
@@ -40,8 +41,9 @@ public class EchoServer extends AbstractServer
   {
 	    System.out.println("Message received: " + msg + " from " + client);
 	    String str = (String) msg;
+	    recivedMSG = str.split("-");
 	    dataBase = new ArrayList<Question>();
-	    if(str.equals("Data base"))
+	    if(recivedMSG[0].equals("get")&&recivedMSG[1].equals("questions"))
 	    {
 			Statement stmt;
 			try 
@@ -98,7 +100,7 @@ public class EchoServer extends AbstractServer
     
     try 
     {
-        conn = DriverManager.getConnection("jdbc:mysql://109.94.101.137/aes","root","308023");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost/aes","root","308023");
         System.out.println("SQL connection succeed");
     }catch (SQLException ex) 
 	    {/* handle any errors*/
