@@ -54,16 +54,16 @@ public class Question implements java.io.Serializable {
 	}
 
 
-	public String getAns2() {
-		return ans2;
-	}
+	
 
 
 	public void setAns2(String ans2) {
 		this.ans2 = ans2;
 	}
 
-
+	public String getAns2() {
+		return ans2;
+	}
 	public String getAns3() {
 		return ans3;
 	}
