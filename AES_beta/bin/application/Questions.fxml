@@ -19,7 +19,7 @@
           <TableColumn fx:id="tbcName" prefWidth="102.0" text="Teacher Name" />
             <TableColumn fx:id="tbcIdText" prefWidth="102.0" text="Text" />
             <TableColumn fx:id="tbcAns1" prefWidth="102.0" text="Answer 1" />
-            <TableColumn fx:id="tbcAns3" prefWidth="102.0" text="Answer 2" />
+            <TableColumn fx:id="tbcAns2" prefWidth="102.0" text="Answer 2" />
             <TableColumn fx:id="tbcAns3" prefWidth="102.0" text="Answer 3" />
             <TableColumn fx:id="tbcAns4" prefWidth="102.0" text="Answer 4" />
             <TableColumn fx:id="tbcCorr" prefWidth="102.0" text="Correct" />

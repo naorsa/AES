@@ -14,17 +14,34 @@ public class Question implements java.io.Serializable {
 	private String ans3;
 	private String ans4;
 	private int correctAns;
-	public Question(String id,String teacherName, String questionIns,String ans1,String ans2,String ans3,String ans4,int correctAns) {
+	private int questionNum;
+	
+	
+	public Question(String id,int questionNum,String teacherName, String questionIns,String ans1,String ans2,String ans3,String ans4,int correctAns) {
 		super();
 		this.ans1 = ans1;
 		this.ans2 = ans2;
 		this.ans3 = ans3;
 		this.ans4 = ans4;
+		this.questionNum = questionNum;
 		this.correctAns = correctAns;
 		this.teacherName = teacherName;
 		this.questionIns = questionIns;
 		this.id = id;
 	}
+	
+	
+	public int getQuestionNum() {
+		return questionNum;
+	}
+
+
+	public void setQuestionNum(int questionNum) {
+		this.questionNum = questionNum;
+	}
+
+
+
 
 
 	public String getAns1() {

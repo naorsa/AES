@@ -36,6 +36,9 @@ public class QuestionsController implements Observer{
 
     @FXML
     private TableColumn<Question, String> tbcAns3;
+    
+    @FXML
+    private TableColumn<Question, String> tbcAns2;
 
     @FXML
     private TextField txtFieldId;
@@ -65,10 +68,10 @@ public class QuestionsController implements Observer{
     private TableView<Question> tblQuestions;
 
     @FXML
-    private TableColumn<Question, String> tbcIdNum;
+    private TableColumn<Question, Integer> tbcIdNum;
 
 	private ArrayList<Question> questions;
-//s
+
 	@FXML
 	void searchQuestion(ActionEvent event) {
 		String ans1;
@@ -113,8 +116,10 @@ public class QuestionsController implements Observer{
 		tbcIdText.setCellValueFactory(new PropertyValueFactory<Question, String>("questionIns"));
 		tbcCorr.setCellValueFactory(new PropertyValueFactory<Question, Integer>("correctAns"));
 		tbcAns1.setCellValueFactory(new PropertyValueFactory<Question, String>("ans1"));
-		tbcAns3.setCellValueFactory(new PropertyValueFactory<Question, String>("ans2"));
-		tbcAns4.setCellValueFactory(new PropertyValueFactory<Question, String>("ans3"));
+		tbcAns2.setCellValueFactory(new PropertyValueFactory<Question, String>("ans2"));
+		tbcAns3.setCellValueFactory(new PropertyValueFactory<Question, String>("ans3"));
+		tbcAns4.setCellValueFactory(new PropertyValueFactory<Question, String>("ans4"));
+		tbcIdNum.setCellValueFactory(new PropertyValueFactory<Question, Integer>("questionNum"));
 		tblQuestions.setItems(queryQuestions);
 		
 
@@ -128,7 +133,7 @@ public class QuestionsController implements Observer{
 	public void initialize() throws IOException {
 		Platform.runLater(() -> rootPane.requestFocus());
 		tblQuestions.getItems().clear();
-		ObservableClient client = new ObservableClient("localhost",8000);
+		ObservableClient client = new ObservableClient("109.64.101.137",8000);
 		client.addObserver(this);
 		client.openConnection();
 
