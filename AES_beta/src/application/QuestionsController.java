@@ -151,11 +151,12 @@ public class QuestionsController implements Observer{
 		}
 		if(arg instanceof ArrayList<?>)
 		{
+			int i=0;
 			questions = (ArrayList<Question>)arg;
 			String[] possibleIDs = new String [questions.size()];
 			String[] possibleNames = new String [questions.size()];
 			String[] possibleQuestion = new String [questions.size()];
-			int i=0;
+			
 			for(Question q:questions)
 			{
 				
