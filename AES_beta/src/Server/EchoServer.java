@@ -7,8 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import com.mysql.jdbc.PreparedStatement;
+import java.util.Map;
+import java.util.Set;
+import java.sql.PreparedStatement;
 
 import application.Message;
 import application.Question;
@@ -130,19 +131,22 @@ public class EchoServer extends AbstractServer {
 
 	public void setObj(Message msg) {
 		recivedMSG = msg.getMsg().split("-");
-		String updateString = "UPDATE ? SET ? WHERE ?";
+		String updateString = "UPDATE ? SET correctans=? WHERE idquestions=?;";
 		if (recivedMSG[1].equals("questions") && recivedMSG[2].equals("map")) {
+			Map<String, Integer> updateMap = msg.getCorrectAns();
 			PreparedStatement stmt;
 			try {
 				stmt = conn.prepareStatement(updateString);
-				stmt.
-				while (rs.next()) {
-					dataBase.add(new Question(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getString(4),
-							rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9)));
+				stmt.setString(1, "questions");
+				Set <String> ids = updateMap.keySet();
+				for(String id:ids) {
+					stmt.setInt(2, updateMap.get(id));
+					stmt.setString(3, id);
+					stmt.executeUpdate();
 				}
-				Message replyMsg = new Message("ok-arraylist",dataBase);
+				Message replyMsg = new Message("map-updated");
 				this.sendToAllClients(replyMsg);
-				rs.close();
+				stmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
