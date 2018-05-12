@@ -1,9 +1,14 @@
 package application;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Message {
+public class Message implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String msg;
 	private ArrayList<Question> questions;
 	private Map<String, Integer> correctAns;
