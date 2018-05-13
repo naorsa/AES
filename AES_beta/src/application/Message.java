@@ -7,7 +7,7 @@ import java.util.Map;
 public class Message implements Serializable {
 
 	/**
-	 * Class that responsible for communication between a server and a client
+	 * Class that responsible for communication between a server and a clients
 	 */
 	/**
 	 * 
