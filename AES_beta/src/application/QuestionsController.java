@@ -9,7 +9,6 @@ import java.util.Observer;
 
 import org.controlsfx.control.textfield.TextFields;
 
-import ocsf.client.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +26,10 @@ import javafx.util.converter.IntegerStringConverter;
 
 public class QuestionsController implements Observer{
 
+	/**
+	 * This class handle with questions window
+	 */
+	
     @FXML
     private TextField txtFieldQuestion;
 
@@ -82,7 +85,10 @@ public class QuestionsController implements Observer{
     private Map<String,Integer> newValues;
 	private ArrayList<Question> questions;
 	
-	
+	/**
+	 * This method happens when the user press on the search button 
+	 * @param event
+	 */
 
 	@FXML
  	void searchQuestion(ActionEvent event) {
@@ -140,6 +146,9 @@ public class QuestionsController implements Observer{
 
 
     
+	/**
+	 * This method happens when the window shown 
+	 */
 	
 	@FXML
 	public void initialize() throws IOException {
@@ -157,7 +166,10 @@ public class QuestionsController implements Observer{
 		client.sendToServer(send);
 
 	}
-	
+	/**
+	 * This method happens when the user press on the update button 
+	 * @param event
+	 */
     @FXML
     void updateQuestion(ActionEvent event) {
     	try {
@@ -176,6 +188,10 @@ public class QuestionsController implements Observer{
 		}
     	
     }
+    
+    /**
+	 * This method happens when the server send an message 
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 

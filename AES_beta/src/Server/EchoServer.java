@@ -1,6 +1,5 @@
 package Server;
 
-import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,6 +16,7 @@ import ocsf.server.*;
 /**
  * This Class is implements the server side The class extends the AbstractServer
  * class Super class is implemented all the connection methods
+ * The connection with the server is used with message class.
  */
 public class EchoServer extends AbstractServer {
 
@@ -33,11 +33,6 @@ public class EchoServer extends AbstractServer {
 
 	/**
 	 * This method handles any messages received from the client.
-	 *
-	 * @param msg
-	 *            The message received from the client.
-	 * @param client
-	 *            The connection from which the message originated.
 	 */
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		Message handleMsg = (Message) msg;
@@ -70,12 +65,9 @@ public class EchoServer extends AbstractServer {
 	// Class methods ***************************************************
 
 	/**
-	 * This method is responsible for the creation of the server instance (there is
-	 * no UI in this phase).
-	 *
-	 * @param args[0]
-	 *            The port number to listen on. Defaults to 5555 if no argument is
-	 *            entered.
+	 * The main method creates mysql driver
+	 * The main method creates connection with the client
+	 * 
 	 */
 	public static void main(String[] args) {
 		int port = 0; // Port to listen on
@@ -107,7 +99,10 @@ public class EchoServer extends AbstractServer {
 			System.out.println("ERROR - Could not listen for clients!");
 		}
 	}
-
+	/**
+	 * getObj method give to client for an asked question
+	 */
+	
 	public void getObj(Message msg) {
 		recivedMSG = msg.getMsg().split("-");
 		if (recivedMSG[1].equals("questions")) {
@@ -127,6 +122,11 @@ public class EchoServer extends AbstractServer {
 			}
 		}
 	}
+	 /**
+	  *  setObj method give to client for an asked question
+	  * @param msg
+	  * 	The changed objects from the client
+	  */
 
 	public void setObj(Message msg) {
 		recivedMSG = msg.getMsg().split("-");

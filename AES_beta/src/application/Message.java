@@ -4,11 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
-<<<<<<< HEAD
-public class Message implements Serializable{
-=======
+
 public class Message implements Serializable {
->>>>>>> refs/remotes/origin/Omer
 	/**
 	 * 
 	 */
