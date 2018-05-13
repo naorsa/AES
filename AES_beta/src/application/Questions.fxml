@@ -22,10 +22,11 @@
             <TableColumn fx:id="tbcAns2" prefWidth="102.0" styleClass="tableColumn" text="Answer 2" />
             <TableColumn fx:id="tbcAns3" prefWidth="102.0" styleClass="tableColumn" text="Answer 3" />
             <TableColumn fx:id="tbcAns4" prefWidth="102.0" styleClass="tableColumn" text="Answer 4" />
-            <TableColumn fx:id="tbcCorr" prefWidth="102.0" styleClass="tableColumn" text="Correct" />
+            <TableColumn fx:id="tbcCorr" onEditCommit="#updateCorrect" prefWidth="102.0" styleClass="tableColumn" text="Correct" />
         </columns>
       </TableView>
       <Button fx:id="btnSearch" layoutX="460.0" layoutY="145.0" mnemonicParsing="false" onAction="#searchQuestion" styleClass="buttonStyleSearch" text="Search" />
       <Button fx:id="update" layoutX="460.0" layoutY="585.0" mnemonicParsing="false" onAction="#updateQuestion" styleClass="buttonStyleUpdate" text="Update" />
+      	<Label fx:id="lblUpdateError" layoutX="435.0" layoutY="555.0" text="Please update the row!" textFill="#ee0707" />
    </children>
 </AnchorPane>
