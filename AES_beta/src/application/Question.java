@@ -9,7 +9,7 @@ public class Question implements java.io.Serializable {
 	private String teacherName;
 	private String questionIns;
 	private String id;
-	private String ans1;//ans1
+	private String ans1;
 	private String ans2;
 	private String ans3;
 	private String ans4;

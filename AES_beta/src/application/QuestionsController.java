@@ -2,6 +2,8 @@ package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,11 +16,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.converter.IntegerStringConverter;
 
 public class QuestionsController implements Observer{
 
@@ -68,16 +73,19 @@ public class QuestionsController implements Observer{
     private TableView<Question> tblQuestions;
 
     @FXML
+    private Label lblUpdateError;
+    
+    @FXML
     private TableColumn<Question, Integer> tbcIdNum;
 
+    private ObservableClient client;
+    private Map<String,Integer> newValues;
 	private ArrayList<Question> questions;
+	
+	
 
 	@FXML
-	void searchQuestion(ActionEvent event) {
-		String ans1;
-		String ans2;
-		String ans3;
-		String ans4;
+ 	void searchQuestion(ActionEvent event) {
 		tblQuestions.getItems().clear();
 		String questionId = txtFieldId.getText();
 		String questionName = txtFieldName.getText();
@@ -130,23 +138,44 @@ public class QuestionsController implements Observer{
 	}
 
 
-    @FXML
-    void updateQuestion(ActionEvent event) {
-    	
-    }
+
+    
 	
 	@FXML
 	public void initialize() throws IOException {
 		Platform.runLater(() -> rootPane.requestFocus());
 		tblQuestions.getItems().clear();
-		ObservableClient client = new ObservableClient("109.64.101.137",8000);
+		tblQuestions.setEditable(true);
+		tbcCorr.setCellFactory(TextFieldTableCell.<Question, Integer>forTableColumn(new IntegerStringConverter()));
+		newValues = new HashMap<String,Integer>();
+		client = new ObservableClient("77.138.5.122",8000);
+		btnSearch.setDisable(true);
+		lblUpdateError.setVisible(false);
 		client.addObserver(this);
 		client.openConnection();
-
-		client.sendToServer("get-questions");
+		Message send = new Message("get-questions");
+		client.sendToServer(send);
 
 	}
-
+	
+    @FXML
+    void updateQuestion(ActionEvent event) {
+    	try {
+    		if(newValues.size() == 0)
+    		{
+    			lblUpdateError.setText("Please update the row!");
+    			lblUpdateError.setVisible(true);
+    		}
+    		else
+    			lblUpdateError.setVisible(false);
+    		Message send = new Message("set-questions-map",newValues);
+			client.sendToServer(send);
+			newValues.clear();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    }
 	@Override
 	public void update(Observable o, Object arg) {
 
@@ -155,29 +184,69 @@ public class QuestionsController implements Observer{
 			String s = (String)arg;
 			System.out.println(s);
 		}
-		if(arg instanceof ArrayList<?>)
+		if(arg instanceof Message)
 		{
-			
-			questions = (ArrayList<Question>)arg;
-			String[] possibleIDs = new String [questions.size()];
-			String[] possibleNames = new String [questions.size()];
-			String[] possibleQuestion = new String [questions.size()];
-			int i=0;
-			
-			for(Question q : questions)
+			Message handleMsg = (Message) arg;
+			String[] recivedMSG = handleMsg.getMsg().split("-");
+			if (recivedMSG[0].equals("ok") &&  recivedMSG[1].equals("arraylist"))
 			{
+				questions = handleMsg.getQuestions();
+				String[] possibleIDs = new String [questions.size()];
+				String[] possibleNames = new String [questions.size()];
+				String[] possibleQuestion = new String [questions.size()];
+				int i=0;
 				
-				possibleIDs[i] = q.getId();
-				possibleNames[i] = q.getTeacherName();
-				possibleQuestion[i] = q.getQuestionIns();
-				i++;
+				for(Question q : questions)
+				{
+					
+					possibleIDs[i] = q.getId();
+					possibleNames[i] = q.getTeacherName();
+					possibleQuestion[i] = q.getQuestionIns();
+					i++;
+				}		
+				TextFields.bindAutoCompletion(txtFieldId, possibleIDs);
+				TextFields.bindAutoCompletion(txtFieldName, possibleNames);
+				TextFields.bindAutoCompletion(txtFieldQuestion, possibleQuestion);
+				btnSearch.setDisable(false);
 			}
 			
-			TextFields.bindAutoCompletion(txtFieldId, possibleIDs);
-			TextFields.bindAutoCompletion(txtFieldName, possibleNames);
-			TextFields.bindAutoCompletion(txtFieldQuestion, possibleQuestion);
+			if(recivedMSG[0].equals("ok") &&  recivedMSG[1].equals("map"))
+			{
+				Message send = new Message("get-questions");
+				try {
+					client.sendToServer(send);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
 		}
 	}
 
-	
+
+
+
+
+	@FXML public void updateCorrect(TableColumn.CellEditEvent<Question, Integer> correctEditEvent) {
+		Question question = tblQuestions.getSelectionModel().getSelectedItem();
+		Integer newValue = correctEditEvent.getNewValue();
+		if(newValue>=1 && newValue <= 4)
+			newValues.put(question.getId(),newValue);
+		else
+		{
+			lblUpdateError.setText("Please enter valid input!");
+			lblUpdateError.setVisible(true);
+		}
+		
+	}
+
+
+
+
+
+	@FXML public void updateCorrect() {}
+
+
+
 }
