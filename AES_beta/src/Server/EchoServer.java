@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.sql.PreparedStatement;
-
 import application.Message;
 import application.Question;
 import ocsf.server.*;
@@ -131,20 +130,19 @@ public class EchoServer extends AbstractServer {
 
 	public void setObj(Message msg) {
 		recivedMSG = msg.getMsg().split("-");
-		String updateString = "UPDATE ? SET correctans=? WHERE idquestions=?;";
+		String updateString = "UPDATE questions set correctans=? where idquestions=?";
 		if (recivedMSG[1].equals("questions") && recivedMSG[2].equals("map")) {
 			Map<String, Integer> updateMap = msg.getCorrectAns();
 			PreparedStatement stmt;
 			try {
 				stmt = conn.prepareStatement(updateString);
-				stmt.setString(1, "questions");
 				Set <String> ids = updateMap.keySet();
 				for(String id:ids) {
-					stmt.setInt(2, updateMap.get(id));
-					stmt.setString(3, id);
+					stmt.setInt(1, updateMap.get(id));
+					stmt.setString(2, id);
 					stmt.executeUpdate();
 				}
-				Message replyMsg = new Message("map-updated");
+				Message replyMsg = new Message("ok-map");
 				this.sendToAllClients(replyMsg);
 				stmt.close();
 			} catch (SQLException e) {
