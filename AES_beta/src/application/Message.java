@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 
+@SuppressWarnings("serial")
 public class Message implements Serializable {
 
 	/**
