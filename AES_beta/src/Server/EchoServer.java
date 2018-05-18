@@ -8,9 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
+
+import comunication.Message;
+import comunication.Question;
+
 import java.sql.PreparedStatement;
-import application.Message;
-import application.Question;
 import ocsf.server.*;
 
 /**
@@ -77,7 +79,7 @@ public class EchoServer extends AbstractServer {
 			/* handle the error */}
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/aes", "root", "308023");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/aes", "root", "Braude");
 			System.out.println("SQL connection succeed");
 		} catch (SQLException ex) {/* handle any errors */
 			System.out.println("SQLException: " + ex.getMessage());

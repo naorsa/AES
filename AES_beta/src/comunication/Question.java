@@ -1,4 +1,4 @@
-package application;
+package comunication;
 
 public class Question implements java.io.Serializable {
 

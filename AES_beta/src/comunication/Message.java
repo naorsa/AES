@@ -1,4 +1,4 @@
-package application;
+package comunication;
 
 import java.io.Serializable;
 import java.util.ArrayList;

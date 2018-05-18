@@ -25,6 +25,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.converter.IntegerStringConverter;
 import ocsf.client.ObservableClient;
+import comunication.*;
 
 public class QuestionsController implements Observer{
 
@@ -160,7 +161,7 @@ public class QuestionsController implements Observer{
 		//tbcCorr.setCellFactory(TextFieldTableCell.<Question, Integer>forTableColumn(new IntegerStringConverter()));
 		tbcCorr.setCellFactory(ComboBoxTableCell.forTableColumn(1,2,3,4));
 		newValues = new HashMap<String,Integer>();
-		client = new ObservableClient("localhost",8000);
+		client = new ObservableClient("192.168.171.37",8000);
 		btnSearch.setDisable(true);
 		lblUpdateError.setVisible(false);
 		client.addObserver(this);
